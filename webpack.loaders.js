@@ -21,7 +21,7 @@ module.exports = [
   // Load jsx extensions with babel so we can use
   // 'import' instead of 'require' and es6 syntax
   {
-    test: /\.jsx?$/,
+    test: /\.(js|jsx)?$/,
     include: path.resolve(__dirname, 'src'),
     loader: "babel-loader",
     options: {
