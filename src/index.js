@@ -1,34 +1,19 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-
-const Login = () => (<div>
-  <p>Login</p>
-  <p>Signup</p>
-</div>);
-
-const Greeter = (props) => {
-  return <div className="firstClass">
-    <h1> Hello, I {props.emotion} {props.libraryName} </h1>
-    <p>I really really {props.emotion} {props.libraryName}</p>
-    <Login />
-  </div >;
-};
-
-class ShoppingList extends React.Component {
-  render() {
-    return (<div>
-      <Greeter emotion="Love" libraryName="ReactJS" />
-      <h1> Shopping List for {this.props.name} </h1>
-      <ul>
-        <li > Instagram </li>
-        <li> WhatsApp </li>
-        <li> Oculus </li>
-      </ul>
-    </div>);
-  }
-}
+import App from './app';
 
 ReactDOM.render(
-  <ShoppingList name="Deepak" />,
+  <App />,
   document.getElementById('app')
 );
+
+
+/*
+Stash my work
+Create branch <branch_name>
+change to that branch
+unstash my work
+git add .
+git commit -m "sdfsdfs"
+git push origin <branch_name>
+*/
