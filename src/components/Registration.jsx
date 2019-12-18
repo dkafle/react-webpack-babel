@@ -1,6 +1,29 @@
 import React from 'react';
 import styles from './form.sass';
 
+const TextInput = props => {
+  const { type, name, value, onChange } = props;
+  return <input
+    type={type}
+    name={name}
+    value={value}
+    onChange={onChange} />
+}
+
+const RadioInput = props => {
+  const { name, value, onClick, checkedValue, displayValue } = props;
+  return (<div className={styles.radioWrap}>
+    <input
+      type="radio"
+      name={name}
+      value={value}
+      onClick={onClick}
+      checked={value === checkedValue ? 'checked' : ''}
+    />
+      {displayValue}
+    </div>);
+}
+
 class Registration extends React.Component {
   constructor(props) {
     super(props);
@@ -17,6 +40,7 @@ class Registration extends React.Component {
       ],
       isValid: false
     };
+    this.handleInputChange.bind(this);
   }
 
   handleInputChange(e) {
@@ -42,35 +66,40 @@ class Registration extends React.Component {
             First Name
           </div>
           <div className={styles.formInput}>
-            <input
+            <TextInput
               type="text"
               name="fname"
               value={this.state.fname}
-              onChange={(evt) => this.handleInputChange(evt)}
+              onChange={this.handleInputChange}
             />
           </div>
           <div className={styles.formLabel}>
             Last Name
           </div>
           <div className={styles.formInput}>
-            <input type="text" name="lname" value={this.state.lname}/>
+            <TextInput
+              type="text"
+              name="lname"
+              value={this.state.lname}
+              onChange={this.handleInputChange} />
           </div>
           <div className={styles.formLabel}>
             Gender
           </div>
           <div className={styles.formInput}>
-            <input
-              type="radio"
+            <RadioInput
               name="gender"
               value="m"
-              onClick={(evt) => this.handleInputChange(evt)}
-              checked={this.state.gender === 'm' ? 'checked' : ''} />Male &nbsp;
-            <input
-              type="radio"
+              onClick={this.handleInputChange.bind(this)}
+              checkedValue={this.state.gender}
+              displayValue={'Male'} />
+            <RadioInput
               name="gender"
               value="f"
-              onClick={(evt) => this.handleInputChange(evt)}
-              checked={this.state.gender === 'f' ? 'checked' : ''} />Female
+              onClick={this.handleInputChange.bind(this)}
+              checkedValue={this.state.gender}
+              displayValue={'Female'}
+            />
           </div>
           <div className={styles.formLabel}>
             Hobbies
