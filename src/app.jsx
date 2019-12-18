@@ -9,8 +9,8 @@ import styles from "./app.sass"  // Css-module styles
 const App = () => (
   <div className={styles.app}>
     <div>
-      <h1>It Works!</h1>
-      <Registration /> 
+      <h1>Registration Form</h1>
+      <Registration />
     </div>
   </div>
 );
