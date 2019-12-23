@@ -40,7 +40,7 @@ class Registration extends React.Component {
       ],
       isValid: false
     };
-    this.handleInputChange.bind(this);
+    // this.handleInputChange.bind(this);
   }
 
   handleInputChange(e) {
@@ -70,7 +70,7 @@ class Registration extends React.Component {
               type="text"
               name="fname"
               value={this.state.fname}
-              onChange={this.handleInputChange}
+              onChange={this.handleInputChange.bind(this)}
             />
           </div>
           <div className={styles.formLabel}>
@@ -81,7 +81,7 @@ class Registration extends React.Component {
               type="text"
               name="lname"
               value={this.state.lname}
-              onChange={this.handleInputChange} />
+              onChange={this.handleInputChange.bind(this)} />
           </div>
           <div className={styles.formLabel}>
             Gender
