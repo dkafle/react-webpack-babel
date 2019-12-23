@@ -31,7 +31,7 @@ class Registration extends React.Component {
       fname: '',
       lname: '',
       gender: null,
-      hobbies: '',
+      hobby: '',
       isValid: false
     };
     // this.handleInputChange.bind(this);
@@ -115,7 +115,7 @@ class Registration extends React.Component {
 
           <div>{
             !this.state.isvalid
-            ? 'Not ready to fill.'
+            ? 'Not valid.'
             : 'Ready submit'
           }</div>
           <button>Submit</button>
