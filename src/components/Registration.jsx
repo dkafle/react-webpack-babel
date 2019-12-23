@@ -31,13 +31,7 @@ class Registration extends React.Component {
       fname: '',
       lname: '',
       gender: null,
-      hobbies: [
-        'hiking',
-        'biking',
-        'reading',
-        'swimming',
-        'walking'
-      ],
+      hobbies: '',
       isValid: false
     };
     // this.handleInputChange.bind(this);
@@ -52,8 +46,15 @@ class Registration extends React.Component {
     });
   }
 
-  getHobbies() {
-    return this.state.hobbies.map((item, index) => {
+  getOptions() {
+    const hobbies = [
+      'hiking',
+      'biking',
+      'reading',
+      'swimming',
+      'walking'
+    ];
+    return hobbies.map((item, index) => {
       return <option key={index}>{item}</option>;
     });
   }
@@ -70,7 +71,8 @@ class Registration extends React.Component {
               type="text"
               name="fname"
               value={this.state.fname}
-              onChange={this.handleInputChange.bind(this)}
+              // onChange={this.handleInputChange.bind(this)}
+              onChange={evt => this.handleInputChange(evt)}
             />
           </div>
           <div className={styles.formLabel}>
@@ -106,7 +108,8 @@ class Registration extends React.Component {
           </div>
           <div className={styles.formInput}>
             <select name="hobby">
-              {this.getHobbies()}
+              <option value="" selected></option>
+              {this.getOptions()}
             </select>
           </div>
 
