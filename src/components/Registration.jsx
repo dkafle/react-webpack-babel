@@ -62,6 +62,7 @@ class Registration extends React.Component {
   render() {
     return(
       <form>
+        <h1>Registration</h1>
         <div className={styles.formContainer}>
           <div className={styles.formLabel}>
             First Name

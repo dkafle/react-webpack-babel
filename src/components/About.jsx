@@ -3,7 +3,7 @@ import dog from '../images/dog.png';
 
 const About = () => (
   <div>
-    Hello
+    <h1>About</h1>
     <img src={dog} className="small-img"/>
   </div>
 );
