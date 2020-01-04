@@ -3,6 +3,7 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
+  console.log(action);
   const newState = {
     age: state.age,
   };
