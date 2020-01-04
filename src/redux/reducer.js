@@ -3,12 +3,20 @@ const initialState = {
 };
 
 const reducer = (state = initialState, action) => {
-  console.log(action);
-  const newState = {
-    age: state.age,
-  };
+  if (action.type === 'AGE_UP') {
+    const newState = {
+      age: ++state.age,
+    }
+    return newState;
+  }
+  if (action.type === 'AGE_DOWN') {
+    const newState = {
+      age: --state.age,
+    };
+    return newState;
+  }
 
-  return newState;
+  return state;
 }
 
 export default reducer;
