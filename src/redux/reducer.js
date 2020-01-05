@@ -27,6 +27,12 @@ const reducer = (state = initialState, action) => {
     return newState;
   }
 
+  if (action.type === 'REMOVE_MOVIE') {
+    const newState = Object.assign({}, state);
+    newState.movies = newState.movies.filter(m => m.id !== action.id)
+    return newState;
+  }
+
   return state;
 }
 

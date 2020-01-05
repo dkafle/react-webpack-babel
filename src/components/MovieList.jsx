@@ -57,7 +57,7 @@ class MovieManager extends React.Component {
       />
       <MovieList
         movies={this.props.movies}
-        onRemoveMovie={() => this.handleRemoveMovie()}
+        onRemoveMovie={(movieId) => this.handleRemoveMovie(movieId)}
       />
     </div>);
   }
