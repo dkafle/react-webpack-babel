@@ -1,5 +1,6 @@
 const initialState = {
-  age: 21
+  age: 21,
+  movies: [],
 };
 
 const reducer = (state = initialState, action) => {
@@ -13,6 +14,16 @@ const reducer = (state = initialState, action) => {
     const newState = {
       age: --state.age,
     };
+    return newState;
+  }
+
+  if (action.type === 'ADD_MOVIE') {
+    const newState = Object.assign({}, state);
+    newState.movies.push({
+      name: action.name,
+      id: state.movies.length,
+    });
+    console.log(newState);
     return newState;
   }
 

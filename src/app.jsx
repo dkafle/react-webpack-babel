@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import "styles/base/_main.sass"  // Global styles
 import "styles/base/_common.sass"  // Global styles
 // import styles from "./app.sass"  // Css-module styles
+import MovieManager from './components/MovieList';
 
 class App extends React.Component {
   render() {
@@ -16,6 +17,7 @@ class App extends React.Component {
           <button onClick={this.props.onAgeUp}>Age Up</button>
           <button onClick={this.props.onAgeDown}>Age Down</button>
         </div>
+        <MovieManager />
       </div>
     </div>);
   }
