@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 
 const MovieInput = (props) => (
   <div>
-    <input type="text" name="movieName" />
+    <input type="text" value={props.movieName} onChange={props.onChange} />
     <button onClick={props.onAddMovie}>Add</button>
   </div>
 );
@@ -17,9 +17,22 @@ const MovieList = (props) => (
 );
 
 class MovieManager extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      movieName: '',
+    };
+  }
+  handleAddMovie() {
+    this.props.onAddMovie(this.state.movieName)
+  }
   render() {
     return (<div>
-      <MovieInput onAddMovie={this.props.onAddMovie} />
+      <MovieInput
+        movieName={this.state.movieName}
+        onChange={(evt) => this.setState({movieName: evt.target.value})}
+        onAddMovie={() => this.handleAddMovie()}
+      />
       <MovieList movies={this.props.movies}/>
     </div>);
   }
@@ -33,10 +46,12 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddMovie: () => dispatch({
-      type: 'ADD_MOVIE',
-      name: 'Marte Dum Tak',
-    })
+    onAddMovie: (movieName) => {
+      dispatch({
+        type: 'ADD_MOVIE',
+        name: movieName,
+      });
+    }
   }
 }
 
