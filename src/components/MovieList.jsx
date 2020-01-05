@@ -23,17 +23,23 @@ class MovieManager extends React.Component {
       movieName: '',
     };
   }
+
   handleAddMovie() {
-    this.props.onAddMovie(this.state.movieName)
+    const movieName = this.state.movieName;
+    this.props.onAddMovie({
+      type: 'ADD_MOVIE',
+      name: movieName,
+    });
   }
+
   render() {
     return (<div>
       <MovieInput
         movieName={this.state.movieName}
-        onChange={(evt) => this.setState({movieName: evt.target.value})}
+        onChange={(evt) => this.setState({ movieName: evt.target.value })}
         onAddMovie={() => this.handleAddMovie()}
       />
-      <MovieList movies={this.props.movies}/>
+      <MovieList movies={this.props.movies} />
     </div>);
   }
 }
@@ -46,12 +52,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    onAddMovie: (movieName) => {
-      dispatch({
-        type: 'ADD_MOVIE',
-        name: movieName,
-      });
-    }
+    onAddMovie: data => dispatch(data),
   }
 }
 
