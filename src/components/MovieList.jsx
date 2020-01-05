@@ -3,7 +3,11 @@ import { connect } from 'react-redux';
 
 const MovieInput = (props) => (
   <div>
-    <input type="text" value={props.movieName} onChange={props.onChange} />
+    <input type="text"
+      value={props.movieName}
+      onKeyDown={props.onKeyDown}
+      onChange={props.onChange}
+    />
     <button onClick={props.onAddMovie}>Add</button>
   </div>
 );
@@ -39,6 +43,9 @@ class MovieManager extends React.Component {
       type: 'ADD_MOVIE',
       name: movieName,
     });
+    this.setState({
+      movieName: ''
+    });
   }
 
   handleRemoveMovie(movieId) {
@@ -50,15 +57,27 @@ class MovieManager extends React.Component {
 
   render() {
     return (<div>
+      <h3>Please enter some movies you have seen recently!</h3>
       <MovieInput
         movieName={this.state.movieName}
-        onChange={(evt) => this.setState({ movieName: evt.target.value })}
+        onChange={(evt) => {
+          const key = evt.target.value;
+          this.setState({ movieName: key })
+        }}
+        onKeyDown={(evt) => {
+          if (evt.which === 13) {
+            this.handleAddMovie();
+          } else if (evt.which === 27) {
+            this.setState({ movieName: '' });
+          }
+        }}
         onAddMovie={() => this.handleAddMovie()}
       />
       <MovieList
         movies={this.props.movies}
         onRemoveMovie={(movieId) => this.handleRemoveMovie(movieId)}
       />
+      <h3>Total: {this.props.movies.length}</h3>
     </div>);
   }
 }
