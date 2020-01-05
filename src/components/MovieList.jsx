@@ -11,7 +11,16 @@ const MovieInput = (props) => (
 const MovieList = (props) => (
   <div>
     <ul>
-      {props.movies.map((movie, i) => <li key={i}>{movie.name}</li>)}
+      {props.movies.map((movie, i) => <li key={i}>
+        <span>{movie.name}</span>
+        <span><a href="#" onClick={(evt) => {
+          evt.preventDefault();
+          props.onRemoveMovie(movie.id);
+        }
+        }>
+          {'[Del]'}
+        </a></span>
+      </li>)}
     </ul>
   </div>
 );
@@ -32,6 +41,13 @@ class MovieManager extends React.Component {
     });
   }
 
+  handleRemoveMovie(movieId) {
+    this.props.onRemoveMovie({
+      type: 'REMOVE_MOVIE',
+      id: movieId,
+    });
+  }
+
   render() {
     return (<div>
       <MovieInput
@@ -39,7 +55,10 @@ class MovieManager extends React.Component {
         onChange={(evt) => this.setState({ movieName: evt.target.value })}
         onAddMovie={() => this.handleAddMovie()}
       />
-      <MovieList movies={this.props.movies} />
+      <MovieList
+        movies={this.props.movies}
+        onRemoveMovie={() => this.handleRemoveMovie()}
+      />
     </div>);
   }
 }
@@ -53,6 +72,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     onAddMovie: data => dispatch(data),
+    onRemoveMovie: data => dispatch(data),
   }
 }
 
