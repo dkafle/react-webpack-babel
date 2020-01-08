@@ -32,11 +32,15 @@ class MovieManager extends React.Component {
     });
   }
 
+  updateMyState(evt) {
+    this.setState({ movieName: evt.target.value })
+  }
+
   render() {
     return (<div>
       <MovieInput
         movieName={this.state.movieName}
-        onChange={(evt) => this.setState({ movieName: evt.target.value })}
+        onChange={(evt) => this.updateMyState(evt)}
         onAddMovie={() => this.handleAddMovie()}
       />
       <MovieList movies={this.props.movies} />

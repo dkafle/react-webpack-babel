@@ -18,7 +18,7 @@ const reducer = (state = initialState, action) => {
   }
 
   if (action.type === 'ADD_MOVIE') {
-    const newState = Object.assign({}, state);
+    const newState = Object.assign({}, state); // newState = {...state};
     newState.movies.push({
       name: action.name,
       id: state.movies.length,
