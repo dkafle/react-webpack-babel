@@ -9,7 +9,7 @@ import MovieManager from './components/MovieList';
 
 class App extends React.Component {
   render() {
-    return (<div className='App'>
+    return (<div className='App' style={{margin: '20px'}}>
       <div>
         <h1>Understand React Redux</h1>
         <div>

@@ -17,12 +17,15 @@ const MovieList = (props) => (
     <ul>
       {props.movies.map((movie, i) => <li key={i}>
         <span>{movie.name}</span>
-        <span><a href="#" onClick={(evt) => {
-          evt.preventDefault();
-          props.onRemoveMovie(movie.id);
-        }
+        <span className="delete"><a 
+          href="#"
+          title="Delete" 
+          onClick={(evt) => {
+            evt.preventDefault();
+            props.onRemoveMovie(movie.id);
+          }
         }>
-          {'[Del]'}
+          {'X'}
         </a></span>
       </li>)}
     </ul>
@@ -39,6 +42,9 @@ class MovieManager extends React.Component {
 
   handleAddMovie() {
     const movieName = this.state.movieName;
+    if(movieName.length < 1) {
+      return;
+    }
     this.props.onAddMovie({
       type: 'ADD_MOVIE',
       name: movieName,

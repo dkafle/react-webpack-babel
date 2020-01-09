@@ -12,7 +12,8 @@
         "transform-runtime",
         "transform-decorators-legacy",
         "transform-class-properties",
-        "babel-plugin-webpack-alias"
+        "babel-plugin-webpack-alias",
+        "plugin-proposal-object-rest-spread"
       ]
     }
   }
