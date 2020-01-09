@@ -6,6 +6,8 @@ import "styles/base/_main.sass"  // Global styles
 import "styles/base/_common.sass"  // Global styles
 // import styles from "./app.sass"  // Css-module styles
 import MovieManager from './components/MovieList';
+import UserTable from './components/UserTable';
+import AlbumTable from './components/AlbumTable';
 
 class App extends React.Component {
   render() {
@@ -18,6 +20,8 @@ class App extends React.Component {
           <button onClick={this.props.onAgeDown}>Age Down</button>
         </div>
         <MovieManager />
+        <UserTable users={this.props.users}/>
+        <AlbumTable albums={this.props.albums} />
       </div>
     </div>);
   }
@@ -26,6 +30,8 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
   return {
     age: state.age,
+    users: state.users,
+    albums: state.albums,
   };
 };
 

@@ -65,9 +65,11 @@ class MovieManager extends React.Component {
           this.setState({ movieName: key })
         }}
         onKeyDown={(evt) => {
-          if (evt.which === 13) {
+          const ENTER_KEY = 13;
+          const ESC_KEY = 27;
+          if (evt.which === ENTER_KEY) {
             this.handleAddMovie();
-          } else if (evt.which === 27) {
+          } else if (evt.which === ESC_KEY) {
             this.setState({ movieName: '' });
           }
         }}
