@@ -7,11 +7,36 @@ import "styles/base/_common.sass"  // Global styles
 // import styles from "./app.sass"  // Css-module styles
 import MovieManager from './components/MovieList';
 
+const API_KEY = 'TsBcDznUA5bcQK7u7lYRwEcIvCqHHXmM';
+const random_gif = 'http://api.giphy.com/v1/gifs/random';
+
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      giffy: {}
+    }
+  }
+
+  componentDidMount() {
+    this.getData();
+  }
+
+  getData() {
+    fetch(random_gif + '?api_key=' + API_KEY)
+      .then(data => data.json())
+      .then(json => this.setState({
+        giffy: json,
+      }));
+  }
+
   render() {
     return (<div className='App'>
       <div>
-        <h1>Understand React Redux</h1>
+        <h3>{this.state.giffy.data ? this.state.giffy.data.title : 'No Title'}</h3>
+        <img src={this.state.giffy.data ? this.state.giffy.data.image_url : ''} />
+        <button onClick={() => this.getData()}>Get new image</button>
+        <h3>Understand React Redux</h3>
         <div>
           <div>Your age is: {this.props.age}</div>
           <button onClick={this.props.onAgeUp}>Age Up</button>
