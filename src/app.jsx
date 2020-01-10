@@ -15,7 +15,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      giffy: {}
+      giffy: {},
+      isFetching: false,
     }
   }
 
@@ -25,12 +26,17 @@ class App extends React.Component {
 
   getRemoteData() {
     const url = random_gif + '?api_key=' + API_KEY;
+    this.setState({
+      giffy: {},
+      isFetching: true,
+    });
     axios.get(url)
       .then(result => {
         console.log(result);
         this.setState({
           giffy: result.data,
-        })
+          isFetching: false,
+        });
       });
   }
 
@@ -39,10 +45,13 @@ class App extends React.Component {
     return (<div className='App'>
       <div>
         <div>
-          <h3>{giffy.data ? giffy.data.title : 'No title'}</h3>
-          <img src={giffy.data ? giffy.data.image_url : ''} /> <br/>
-          <button onClick={() =>this.getRemoteData()}>Get Next</button>
+          <button
+            onClick={() =>this.getRemoteData()}
+            disabled={this.state.isFetching}
+            >Get Next</button>
         </div>
+        <h3>{giffy.data ? giffy.data.title : 'No title'}</h3>
+        <img src={giffy.data ? giffy.data.image_url : ''} /> <br/>
         <h1>Understand React Redux</h1>
         <div>
           <div>Your age is: {this.props.age}</div>
