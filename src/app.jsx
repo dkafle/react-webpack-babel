@@ -8,6 +8,16 @@ import "styles/base/_common.sass"  // Global styles
 import MovieManager from './components/MovieList';
 
 class App extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      giffy: {}
+    }
+  }
+
+  componentDidMount() {
+    
+  }
   render() {
     return (<div className='App'>
       <div>
