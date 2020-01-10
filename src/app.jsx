@@ -35,7 +35,7 @@ class App extends React.Component {
       <div>
         <h3>{this.state.giffy.data ? this.state.giffy.data.title : 'No Title'}</h3>
         <img src={this.state.giffy.data ? this.state.giffy.data.image_url : ''} />
-        <button onClick={() => this.getData()}>Get new image</button>
+        <button onClick={() => this.getData()}>Get Next</button>
         <h3>Understand React Redux</h3>
         <div>
           <div>Your age is: {this.props.age}</div>
