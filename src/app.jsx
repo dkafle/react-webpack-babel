@@ -48,7 +48,7 @@ class App extends React.Component {
         <ImageViewer
           giffy={this.state.giffy}
           isFetching={this.state.isFetching}
-          getRemoteData={this.getRemoteData} 
+          getRemoteData={() => this.getRemoteData()} 
         />
         <h1>Understand React Redux</h1>
         <div>
