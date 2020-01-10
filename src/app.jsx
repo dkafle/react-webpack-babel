@@ -7,6 +7,7 @@ import "styles/base/_main.sass"  // Global styles
 import "styles/base/_common.sass"  // Global styles
 // import styles from "./app.sass"  // Css-module styles
 import MovieManager from './components/MovieList';
+import ImageViewer from './components/ImageViewer';
 
 const API_KEY = 'TsBcDznUA5bcQK7u7lYRwEcIvCqHHXmM';
 const random_gif = 'http://api.giphy.com/v1/gifs/random';
@@ -44,14 +45,11 @@ class App extends React.Component {
     const giffy = this.state.giffy;
     return (<div className='App'>
       <div>
-        <div>
-          <button
-            onClick={() =>this.getRemoteData()}
-            disabled={this.state.isFetching}
-            >Get Next</button>
-        </div>
-        <h3>{giffy.data ? giffy.data.title : 'No title'}</h3>
-        <img src={giffy.data ? giffy.data.image_url : ''} /> <br/>
+        <ImageViewer
+          giffy={this.state.giffy}
+          isFetching={this.state.isFetching}
+          getRemoteData={this.getRemoteData} 
+        />
         <h1>Understand React Redux</h1>
         <div>
           <div>Your age is: {this.props.age}</div>
