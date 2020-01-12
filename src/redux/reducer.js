@@ -10,15 +10,13 @@ let movieId = 0;
 
 const reducer = (state = initialState, action) => {
   if (action.type === 'AGE_UP') {
-    const newState = {
-      age: ++state.age,
-    }
+    const newState = Object.assign({}, state);
+    newState.age = ++state.age;
     return newState;
   }
   if (action.type === 'AGE_DOWN') {
-    const newState = {
-      age: --state.age,
-    };
+    const newState = Object.assign({}, state);
+    newState.age = --state.age;
     return newState;
   }
 
