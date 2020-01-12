@@ -8,47 +8,49 @@ import "styles/base/_common.sass"  // Global styles
 // import styles from "./app.sass"  // Css-module styles
 import MovieManager from './components/MovieList';
 import ImageViewer from './components/ImageViewer';
+import {getGifAction} from './actions/gifActions'; 
 
 const API_KEY = 'TsBcDznUA5bcQK7u7lYRwEcIvCqHHXmM';
 const random_gif = 'http://api.giphy.com/v1/gifs/random';
 
 class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      giffy: {},
-      isFetching: false,
-    }
-  }
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     giffy: {},
+  //     isFetching: false,
+  //   }
+  // }
 
   componentDidMount() {
-    this.getRemoteData();
+    // this.getRemoteData();
+    this.props.onGetGif()
   }
 
-  getRemoteData() {
-    const url = random_gif + '?api_key=' + API_KEY;
-    this.setState({
-      giffy: {},
-      isFetching: true,
-    });
-    axios.get(url)
-      .then(result => {
-        console.log(result);
-        this.setState({
-          giffy: result.data,
-          isFetching: false,
-        });
-      });
-  }
+  // getRemoteData() {
+  //   const url = random_gif + '?api_key=' + API_KEY;
+  //   this.setState({
+  //     giffy: {},
+  //     isFetching: true,
+  //   });
+  //   axios.get(url)
+  //     .then(result => {
+  //       console.log(result);
+  //       this.setState({
+  //         giffy: result.data,
+  //         isFetching: false,
+  //       });
+  //     });
+  // }
 
   render() {
-    const giffy = this.state.giffy;
+    const giffy = this.props.giffy;
     return (<div className='App'>
       <div>
         <ImageViewer
-          giffy={this.state.giffy}
-          isFetching={this.state.isFetching}
-          getRemoteData={() => this.getRemoteData()} 
+          giffy={this.props.giffy}
+          isFetching={this.props.isFetching}
+          getRemoteData={() => this.props.onGetGif()} 
         />
         <h1>Understand React Redux</h1>
         <div>
@@ -65,6 +67,8 @@ class App extends React.Component {
 const mapStateToProps = (state) => {
   return {
     age: state.age,
+    isFetching: state.isFetching,
+    giffy: state.giffy
   };
 };
 
@@ -72,6 +76,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onAgeUp: () => dispatch({ type: 'AGE_UP' }),
     onAgeDown: () => dispatch({ type: 'AGE_DOWN' }),
+    onGetGif: () => getGifAction(dispatch),
   };
 };
 
