@@ -1,34 +1,70 @@
-import React from 'react'
+import React, {Fragment} from 'react'
 import ReactDOM from 'react-dom'
 
-const Login = () => (<div>
-  <p>Login</p>
-  <p>Signup</p>
-</div>);
+const HobbyInput = (props) => (
+  <input type="text" name="hobby" value={props.hobby} onChange={props.change} onKeyPress={props.onEnterPressed} />
+)
 
-const Greeter = (props) => {
-  return <div className="firstClass">
-    <h1> Hello, I {props.emotion} {props.libraryName} </h1>
-    <p>I really really {props.emotion} {props.libraryName}</p>
-    <Login />
-  </div >;
-};
+//Function component
+//Dont maintain state
+const ListItems = (props) => (
+  <ul>
+    {props.hobbies.map(h => <li>{h}</li>)}
+  </ul>
+);
 
-class ShoppingList extends React.Component {
+//Class Component
+//Stateful Component
+class Greet extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      hobby: '',
+      hobbies: ['hike', 'bike', 'music']
+    }
+  }
+
+  handleInput(evt) {
+    const ENTER_KEY = 13;
+    let newState = Object.assign({}, this.state);   // newState = {...this.state};
+    const currentKey = evt.target.value;
+    newState.hobby = evt.target.value;
+    this.setState(newState);
+  }
+
+  addHobby(evt) {
+    const hasHobby = this.state.hobby.length > 0;
+    const typeEnterKey = evt.key === 'Enter';
+    if( !typeEnterKey || !hasHobby) {
+      return;
+    }
+    const newState = Object.assign({}, this.state);
+    newState.hobbies.push(this.state.hobby);
+    newState.hobby = '';
+    this.setState(newState);
+  }
+
   render() {
-    return (<div>
-      <Greeter emotion="Love" libraryName="ReactJS" />
-      <h1> Shopping List for {this.props.name} </h1>
-      <ul>
-        <li > Instagram </li>
-        <li> WhatsApp </li>
-        <li> Oculus </li>
-      </ul>
-    </div>);
+    let personAge = this.props.age;
+    personAge = 25;
+    return (
+      <Fragment>
+        <h1>Hello {this.props.personName}</h1>
+        <p>This is hello paragraph</p>
+        <p>Ramesh is {personAge} years old</p>
+        <HobbyInput
+          hobby={this.state.hobby}
+          change={(evt) => this.handleInput(evt)}
+          onEnterPressed={this.addHobby.bind(this)}
+        />
+        <h3>There are {this.state.hobbies.length}</h3>
+        <ListItems hobbies={this.state.hobbies} />
+      </Fragment>
+    );
   }
 }
 
 ReactDOM.render(
-  <ShoppingList name="Deepak" />,
+  <Greet personName={'Ramesh'} age={55} />,
   document.getElementById('app')
 );
